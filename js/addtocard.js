@@ -1,0 +1,4 @@
+function addtocart() {
+    alert('goo!');
+
+}
