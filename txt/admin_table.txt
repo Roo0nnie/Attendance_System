@@ -1,0 +1,10 @@
+use attendance_system;
+create table admin_account (
+    admin_id integer auto_increment not null,
+    admin_name	varchar(100) not null default '',
+    admin_last varchar(100) not null default '',
+    admin_middle varchar(100) not null default '',
+    admin_user varchar(100) not null default '',
+    admin_pass varchar(100) not null default '',
+    primary key (admin_id)
+);

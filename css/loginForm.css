@@ -1,0 +1,65 @@
+:root {
+  --section-medyoblack-color:#101010;
+  --section-masblack-color:#202020;
+  --section-medyoGray-color:#3f3d37;
+  --section-lowGray-color:#7a7b6c;
+  --white-color:#ffffff;
+   --main-color:#6adf0a; 
+   --section-black-color:#000000;
+   --backgroun-transparent: hsl(0 0% 0% / .6);
+}
+* {
+  margin: 0px;
+	padding: 0px;	
+	box-sizing: border-box;
+	font-family: 'Golos Text', sans-serif;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.login-wrapper {
+  margin-top: 10%;
+  padding: 20px;
+	border: 1px solid black;
+	background-image: url(../assets/img/LogoCloseUp.png);
+	border: none;
+	border-radius: 10px;
+}
+.content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.content p {
+	/* margin-top: 5px; */
+	font-size: 15px;
+}
+.content h2 {
+	color: #1337C3;
+  font-weight: 700;
+}
+form {
+	padding: 20px;
+}
+input {
+	border-radius: 5px;
+	width: 350px;
+	border: none;
+	padding: 10px;
+}
+#login {
+	color: white;
+	background: linear-gradient(to right, #ffffff, #000000);
+	cursor: pointer;
+	margin: 2px;
+}
+span a {
+	color: #1337C3;
+	margin: 5px;
+	text-decoration: none;
+}
+label {
+	font-size: 13px;
+}
