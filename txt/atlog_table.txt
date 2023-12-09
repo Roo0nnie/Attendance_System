@@ -1,0 +1,18 @@
+create DATABASE attendance_system;
+USE attendance_system;
+CREATE TABLE atlog (
+    atlog_id integer not null AUTO_INCREMENT,
+    emp_id not null,
+    atlog_date date,
+    am_in time null,
+    am_out time null,
+    pm_in time null,
+    pm_out time null,
+    am_late integer, 
+    am_undertime integer,
+    pm_late integer,
+    pm_undertime integer,
+    PRIMARY KEY(atlog_id)
+);
+ALTER TABLE atlog add CONSTRAINT FOREIGN KEY fk_atloag_employee (emp_id) 
+REFERENCES employee (emp_id)
