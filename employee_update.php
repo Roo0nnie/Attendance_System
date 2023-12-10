@@ -4,6 +4,7 @@ if(isset($_POST['submit'])){
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $middle_name = $_POST['middle_name'];
+    $com_id = $_POST['com_id'];
     $address = $_POST['address'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -15,6 +16,7 @@ if(isset($_POST['submit'])){
             first_name = '$first_name',
             middle_name = '$middle_name',
             last_name= '$last_name',
+            com_id= '$com_id',
             address= '$address',
             email= '$email',
             phone = '$phone'
@@ -39,6 +41,7 @@ if(isset($_GET['id'])){
         $edit_first_name = $row['first_name'];
         $edit_middle_name = $row['middle_name'];
         $edit_last_name = $row['last_name'];
+        $edit_com_id = $row['com_id'];
         $edit_address = $row['address'];
         $edit_email = $row['email'];
         $edit_phone = $row['phone'];
@@ -75,6 +78,7 @@ if(isset($_GET['id'])){
                         <div class="row mt-5">
                             <div class="col-3">
                             <div class="row"><div><label for="" class="form-label mt-2">Full name</label></div></div>
+                            <div class="row"><div><label for="" class="form-label mt-3">Company ID</label></div></div>
                             <div class="row"><div><label for="" class="form-label mt-3">Address</label></div></div>
                             <div class="row"><div><label for="" class="form-label mt-3">Email</label></div></div>
                             <div class="row"><div><label for="" class="form-label mt-3">Phone</label></div></div>
@@ -90,6 +94,7 @@ if(isset($_GET['id'])){
 
                                     <input type="text" class="form-control" placeholder="Last name" name="last_name" size="30" value="<?php echo $edit_last_name; ?>">         
                                 </div>
+                                <input type="text" class="form-control mt-2" placeholder="Company ID" name="com_id" size="30" value="<?php echo $edit_com_id; ?>">
                                 <input type="text" class="form-control mt-2" placeholder="Address" name="address" size="30" value="<?php echo $edit_address; ?>">  
                                 <input type="text" class="form-control mt-2" placeholder="Email" name="email" size="30" value="<?php echo $edit_email; ?>">  
 

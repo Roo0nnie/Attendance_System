@@ -1,13 +1,12 @@
 use attendance_system;
 create table employee(
     emp_id integer auto_increment not null,
+    com_id varchar(50) not null default '',
     first_name	varchar(50) not null default '',
+    middle_name varchar(50) not null default '',
     last_name varchar(50) not null default '',
-    middle_name	varchar(50) not null default '',
-    middle_name varchar(5) not null default '',
     address varchar(100) not null default '',
     email varchar(100) not null default '',
     phone varchar(20) not null default '',
-    primary key (emp_id)
-    
+    primary key (emp_id)  
 );
