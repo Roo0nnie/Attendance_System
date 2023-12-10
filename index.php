@@ -34,7 +34,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
     <body>
         <!-- </li>
         <p>Welcome, <?php $_SESSION['admin_name']; ?>!</p> -->
-        <!-- =============== Navigation ===============Jolie= -->
+        <!-- =============== Navigation ================ -->
         <div class="container-wrapper">
             <div class="navigation bg-yellow">
                 <ul>
