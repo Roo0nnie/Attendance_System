@@ -162,6 +162,12 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                                     </div>
                                                                     <div class="row">
                                                                         <div class="form-floating mt-2">
+                                                                            <input type="text" class="form-control" id="floatingemployeepass" name="com_id" placeholder="Company ID" autocomplete="off" required>
+                                                                            <label for="floatingemployeeaddress" class="px-4">Company ID</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="form-floating mt-2">
                                                                             <input type="text" class="form-control" id="floatingemployeepass" name="address" placeholder="Address" autocomplete="off" required>
                                                                             <label for="floatingemployeeaddress" class="px-4">Address</label>
                                                                         </div>
@@ -255,14 +261,15 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                         <table class="table table-hover table-responsive">
                                                             <thead>
                                                                 <tr>
-                                                                    <td style="width: 500px;">#</td>
-                                                                    <td style="width: 500px;">Name</td>
-                                                                    <td style="width: 500px;">Middle name</td>
-                                                                    <td style="width: 500px;">Surname</td>
-                                                                    <td style="width: 500px;">Address</td>
-                                                                    <td style="width:500px;">Email</td>
-                                                                    <td style="width: 500px;">Phone</td>
-                                                                    <td style="width: 500px;">Action</td>
+                                                                    <td style="width: 11.1%;">#</td>
+                                                                    <td style="width: 11.1%;">Name</td>
+                                                                    <td style="width: 11.1%;">Middle name</td>
+                                                                    <td style="width: 11.1%;">Surname</td>
+                                                                    <td style="width: 11.1%;">Company ID</td>
+                                                                    <td style="width: 11.1%;">Address</td>
+                                                                    <td style="width: 11.1%;">Email</td>
+                                                                    <td style="width: 11.1%;">Phone</td>
+                                                                    <td style="width: 11.1%;">Action</td>
                                                                 </tr>
                                                             </thead>
     
@@ -280,6 +287,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                                         $employee_id = $row['emp_id'];
                                                                         $employee_name = $row['first_name'];
                                                                         $employee_middle = $row['middle_name'];
+                                                                        $employee_com_id = $row['com_id'];
                                                                         $employee_last = $row['last_name'];
                                                                         $employee_address = $row['address'];
                                                                         $employee_email = $row['email'];
@@ -290,6 +298,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                                         <td class="text-start">' . $employee_name . '</td>
                                                                         <td class="text-start">' . $employee_middle . '</td>
                                                                         <td class="text-start">' . $employee_last . '</td>
+                                                                        <td>' . $employee_com_id . '</td>
                                                                         <td>' . $employee_address . '</td>
                                                                         <td>' . $employee_email . '</td>
                                                                         <td>' . $employee_mobile . '</td>
@@ -489,6 +498,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                     <div class="row mt-5">
                                                         <div class="col-3">
                                                         <div class="row"><div><label for="" class="form-label mt-2">Full name</label></div></div>
+                                                        <div class="row"><div><label for="" class="form-label mt-3">Company ID</label></div></div>
                                                         <div class="row"><div><label for="" class="form-label mt-3">Address</label></div></div>
                                                         <div class="row"><div><label for="" class="form-label mt-3">Email</label></div></div>
                                                         <div class="row"><div><label for="" class="form-label mt-3">Phone</label></div></div>
@@ -502,6 +512,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                                 <input type="text" class="form-control" placeholder="Middle name" name="middle_name" value="' . $row["middle_name"] . '">
                                                                 <input type="text" class="form-control" placeholder="Last name" name="last_name" value="' . $row["last_name"] . '">         
                                                             </div>
+                                                            <input type="text" class="form-control mt-2" placeholder="ID" name="com_id" value="' . $row["com_id"] . '">
                                                             <input type="text" class="form-control mt-2" placeholder="Address" name="address" value="' . $row["address"] . '">
                                                             <input type="text" class="form-control mt-2" placeholder="Email" name="email" value="' . $row["email"] . '">  
                                                             <input type="text" class="form-control mt-2" placeholder="Phone" name="phone" value="' . $row["phone"] . '">

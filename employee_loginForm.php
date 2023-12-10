@@ -1,5 +1,4 @@
-<?php $title = "Login"; 
-session_start();
+<?php $title = "Employee"; 
 ?>
 
 <!DOCTYPE html>
@@ -23,20 +22,13 @@ session_start();
         <section class="login">
             <div class="container login-wrapper">
                 <div class="content">
-                <h2  class="text-white">Welcome back!</h2>
-                <p class="text-white"><b>Check Out Your Employee</b></p>
-
-                <form action="login.php" method="POST">
-                <?php if(isset($_SESSION['error_message'])) { ?>
-                        <p class="error"><?php echo $_GET['error']; ?> </p>
-                    <?php } ?>
-                    <input name="admin_user" type="text" class="form-control" placeholder="Username" required><br>
-                    <input name="admin_pass" type="password" class="form-control mt-3" placeholder="Password" required><br>
+                <h2  class="text-white">Welcome Our Employee</h2>
+                <form action="employee_login.php" method="POST">
+                    <input name="com_id" type="text" class="form-control" placeholder="Company ID" required><br>
+                    <input name="emp_name" type="text" class="form-control mt-3" placeholder="Name" required><br>
                     <center><b><label for="forgot-Pass"> <span><a href="#" class="text-white">Forgot</a></span><span class="text-white">your</span> <span class="text-black">password</span></label></b></center><br>
-
                     <center><input type="submit" name="submit" value="Login" id="login"></center>
                 </form>
-                    <b><label>Don't have a account?<span><a href="#">Sign up</a></span></label></b>
                 </div>
             </div>
         </section>
