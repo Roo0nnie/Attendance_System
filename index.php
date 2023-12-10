@@ -314,7 +314,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                         </div>
     
                         <div class="card">
-                            <!-- ======================= Login Reports Dashboard ================== -->
+                            <!-- ======================= Login Reports Dashboard ====================== -->
                             <div>
                                 <div class="row">
                                     <div class="col d-flex justify-content-between">
