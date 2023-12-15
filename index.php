@@ -93,7 +93,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                             <ion-icon name="menu-outline" class="text-black"></ion-icon>
                         </div>
                         <div class="employee">
-                            <button class="btn-red mt-3"><a href="logout.php">Logout</a></button>
+                            <button class="btn-red mt-3"><a href="employee_loginForm.php">Employee attendance</a></button>
+                            <button class="btn-red mt-3"><a href="logout.php"><ion-icon name="power-outline"></ion-icon></a></button>
                         </div>
                     </div>
                     <!-- ======================= Employee Dashboard ================== -->
