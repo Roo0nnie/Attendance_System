@@ -1,4 +1,6 @@
 <?php $title = "Employee";
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -32,20 +34,19 @@
                     <form action="employee_login.php" method="POST" class="container">
                                 <?php
                                 // Retrieve the error message from the URL parameter 'error'
-                                if(isset($_GET['error'])) {
-                                    $error = urldecode($_GET['error']);
-                                    // Display the error message
-                                    echo "<p>$error</p>";
+                                if (isset($_SESSION['error_message'])) {
+                                    echo "<p>" . $_SESSION['error_message'] . "</p>";
+                                    unset($_SESSION['error_message']); // Remove the error message from the session
                                 }
                                 ?>
                         <input name="com_id" type="text" class="form-control input-field" placeholder="Company ID" require><br>
                         <input name="emp_name" type="text" class="form-control input-field" placeholder="Name" require><br>
                         <!-- <center><input type="submit" name="submit" value="Login" id="login"></center> -->
                         <center>
-							<button type="submit" class='' id="AM" name="submit" value='1'>IN AM</button>
-							<button type="submit" class='' id="AM" name="submit"  value='2'>OUT AM</button>
-							<button type="submit" class='' id="PM" name="submit"  value='3'>IN PM</button>
-							<button type="submit" class='' id="PM" name="submit"  value='4'>OUT PM</button>
+							<button type="submit" class='btn-red' id="AM" name="submit" value='1'>IN AM</button>
+							<button type="submit" class='btn-red' id="AM" name="submit"  value='2'>OUT AM</button>
+							<button type="submit" class='btn-red' id="PM" name="submit"  value='3'>IN PM</button>
+							<button type="submit" class='btn-red' id="PM" name="submit"  value='4'>OUT PM</button>
 						</center>
 						<!-- <div class="loading text-black" style="display: none"><center>Please wait...</center></div> -->
                     </form>
