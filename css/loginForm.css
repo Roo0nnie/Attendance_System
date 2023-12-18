@@ -24,14 +24,13 @@ body::-webkit-scrollbar {
 	border: 1px solid black;
 	border: none;
 	border-radius: 10px;
-		width: 800px;
+	width: 800px;
 }
 .content {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-
 }
 .content p {
 	/* margin-top: 5px; */
@@ -40,6 +39,11 @@ body::-webkit-scrollbar {
 .content h2 {
 	color: #1337C3;
   font-weight: 700;
+}
+.admin-key {
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
 }
 form {
 	padding: 20px;
@@ -81,9 +85,8 @@ label {
   }
   
 .btn-red {
-	/* background:black; */
-	background-color: rgb(82, 74, 74);
-	color: var(--main-color-white);
+	background: rgb(211, 198, 198);
+	color: var(--main-color-black);
 	box-shadow: 0 5px 10px rgba(0,0,0,0.23);
 	transition: .5s ease-in-out;
 	padding: 0.75em 1.5em;

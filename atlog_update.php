@@ -1,24 +1,37 @@
 <?php
 include 'db_conn.php';
 if(isset($_POST['submit'])){
-    $admin_name = $_POST['admin_name'];
-    $admin_last = $_POST['admin_last'];
-    $admin_user = $_POST['admin_user'];
-    $admin_pass = $_POST['admin_pass'];
+    $emp_id = $_POST['emp_id'];
+    $first_name = $_POST['first_name'];
+    $middle_name = $_POST['middle_name'];
+    $last_name = $_POST['last_name'];
+    $com_id = $_POST['com_id'];
+    $atlog_date = $_POST['atlog_date'];
+    $AM_in = $_POST['AM_in'];
+    $AM_out = $_POST['AM_out'];
+    $PM_in = $_POST['PM_in'];
+    $PM_out = $_POST['PM_out'];
 
+    // Update employee table
+    $employee_sql = "UPDATE employee SET 
+                    first_name = '$first_name',
+                    middle_name = '$middle_name',
+                    last_name = '$last_name',
+                    com_id = '$com_id'
+                    WHERE emp_id = '$emp_id'";
 
-    // Assuming you have an admin_id ID to identify the record to update
-    $admin_id = $_POST['admin_id'];
-    $sql = "UPDATE admin_account SET 
-            admin_name = '$admin_name',
-            admin_last = '$admin_last',
-            admin_user = '$admin_user',
-            admin_pass = '$admin_pass'
-            WHERE admin_id = '$admin_id'";
+    // Update atlog table
+    $atlog_sql = "UPDATE atlog SET 
+                    atlog_date = '$atlog_date',
+                    am_in = '$AM_in',
+                    am_out = '$AM_out',
+                    pm_in = '$PM_in',
+                    pm_out = '$PM_out'
+                    WHERE emp_id = '$emp_id'";
 
-    if(mysqli_query($conn, $sql)){
-        // echo "Record updated successfully";
+    if(mysqli_query($conn, $employee_sql) && mysqli_query($conn, $atlog_sql)){
         header('location:index.php');
+        exit();
     } else {
         echo "Could not update record: ". mysqli_error($conn);
     }
@@ -27,7 +40,7 @@ if(isset($_POST['submit'])){
 // Fetch the existing data to pre-fill the form for editing
 if(isset($_GET['id'])){
     $edit_id = $_GET['id'];
-    $sql_employee = "SELECT * FROM `employee`";
+    $sql_employee = "SELECT * FROM `employee` WHERE emp_id = $edit_id";
     $result_employee = mysqli_query($conn, $sql_employee);
 
     if ($result_employee) {
@@ -97,7 +110,7 @@ if(isset($_GET['id'])){
                             <div class="col-9">    
                             <form method="POST">
                                 <div class="input-group">
-                                    <input type="hidden"name="admin_id" value="<?php echo $edit_atlog_id; ?>">
+                                    <input type="hidden"name="emp_id" value="<?php echo $edit_atlog_id; ?>">
                                     <input type="text" class="form-control" placeholder="First name" name="first_name" size="30" value="<?php echo $edit_emp_first; ?>">
                                     <input type="text" class="form-control" placeholder="Middle name" name="middle_name" size="30" value="<?php echo $edit_emp_mid; ?>">
 
@@ -106,10 +119,10 @@ if(isset($_GET['id'])){
                                 </div>
                                 <input type="text" class="form-control mt-2" placeholder="Company ID" name="com_id" size="30" value="<?php echo $edit_com_id; ?>">
                                 <input type="text" class="form-control mt-2" placeholder="Date" name="atlog_date" size="30" value="<?php echo $edit_atlog_date; ?>"> 
-                                <input type="text" class="form-control mt-2" placeholder="AM in" name="AM_in" size="30" value="<?php echo $edit_am_in; ?>"> 
-                                <input type="text" class="form-control mt-2" placeholder="AM out" name="AM_out" size="30" value="<?php echo $edit_am_out; ?>"> 
-                                <input type="text" class="form-control mt-2" placeholder="PM in" name="PM_in" size="30" value="<?php echo $edit_pm_in; ?>"> 
-                                <input type="text" class="form-control mt-2" placeholder="PM out" name="PM_out" size="50" value="<?php echo $edit_pm_out; ?>">
+                                <input type="time" class="form-control mt-2" placeholder="AM in" name="AM_in" size="30" value="<?php echo $edit_am_in; ?>"> 
+                                <input type="time" class="form-control mt-2" placeholder="AM out" name="AM_out" size="30" value="<?php echo $edit_am_out; ?>"> 
+                                <input type="time" class="form-control mt-2" placeholder="PM in" name="PM_in" size="30" value="<?php echo $edit_pm_in; ?>"> 
+                                <input type="time" class="form-control mt-2" placeholder="PM out" name="PM_out" size="50" value="<?php echo $edit_pm_out; ?>">
                              
                                 <input type="submit" name="submit" value="Save" class="btn-red mt-2">
                                

@@ -22,10 +22,15 @@ session_start();
     <div class="login-form">
         <section class="login">
             <div class="container login-wrapper">
-                <div class="content bg-yellow-container">
-                <h2  class="text-black mt-2">Welcome back!</h2>
-                <p class="text-black">Check Out Your Employee, Admin.</p>
-<div>
+                <div class="bg-yellow-container position-relative">
+                <div class="admin-key">
+                <span class="btn-red mt-3"><a href="employee_loginForm.php"><ion-icon name="ellipsis-horizontal-outline"></ion-icon></a></span>
+                </div>
+                <div class="content">
+                <h2  class="text-black mt-2 text-center ">Log in Admin</h2>
+                <p class="text-black text-center ">Check out your employee, Admin.</p>
+                </div>
+
 <form action="login.php" method="POST">
                     <?php
                       // Retrieve the error message from the URL parameter 'error'
@@ -40,7 +45,7 @@ session_start();
 
                     <center><input type="submit" name="submit" value="Login" id="login" class="btn-red"></center>
                 </form>
-</div>
+
                 
                     <!-- <b><label>Don't have a account?<span><a href="#">Sign up</a></span></label></b> -->
                 </div>
@@ -48,5 +53,10 @@ session_start();
         </section>
     </div>                                           
 </body>
+
+  <!-- ====== ionicons ======= -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </html>
         

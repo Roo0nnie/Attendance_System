@@ -17,6 +17,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./js/bootstrap.bundle.min.js"></script>
         <script defer src="./js/index.js"></script>
+        <!-- <link rel="stylesheet" href="./css/index.css"> -->
         <link rel="stylesheet" href="./css/index.css">
 
         <!-- Fonts -->
@@ -83,8 +84,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                             <span class="title">Monthly Reports</span>
                         </a>
                     </li>
+                    
                 </ul>
+                
             </div>
+            <div>
+                </div>
+            
+           
 
             <!-- ========================= Main ==================== -->
             <div class="main ">
@@ -93,8 +100,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                         <ion-icon name="menu-outline" class="text-black"></ion-icon>
                     </div>
                     <div class="employee">
-                        <button class="btn-red mt-3"><a href="employee_loginForm.php">Employee attendance</a></button>
+                        <button class="btn-red mt-3"><a href="employee_loginForm.php"><ion-icon name="ellipsis-vertical-outline"></ion-icon</a></button>
                         <button class="btn-red mt-3"><a href="logout.php"><ion-icon name="power-outline"></ion-icon></a></button>
+
                     </div>
                 </div>
                 <!-- ======================= Employee Dashboard ================== -->
