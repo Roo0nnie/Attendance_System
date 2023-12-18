@@ -2,6 +2,7 @@
 include 'db_conn.php';
 if(isset($_POST['submit'])){
     $admin_name = $_POST['admin_name'];
+    $admin_midddle = $_POST['admin_midddle'];
     $admin_last = $_POST['admin_last'];
     $admin_user = $_POST['admin_user'];
     $admin_pass = $_POST['admin_pass'];
@@ -11,6 +12,7 @@ if(isset($_POST['submit'])){
     $admin_id = $_POST['admin_id'];
     $sql = "UPDATE admin_account SET 
             admin_name = '$admin_name',
+            admin_midddle = '$admin_midddle',
             admin_last = '$admin_last',
             admin_user = '$admin_user',
             admin_pass = '$admin_pass'
@@ -33,6 +35,7 @@ if(isset($_GET['id'])){
     if($fetch_result && mysqli_num_rows($fetch_result) > 0){
         $row = mysqli_fetch_assoc($fetch_result);
         $edit_admin_name = $row['admin_name'];
+        $edit_admin_midddle = $row['admin_midddle'];
         $edit_admin_last = $row['admin_last'];
         $edit_admin_user = $row['admin_user'];
         $edit_admin_pass = $row['admin_pass'];
@@ -46,6 +49,7 @@ if(isset($_GET['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="./css/admin_update.css">-->
    <link rel="stylesheet" href="./css/admin_update.css">
     
     <title>Edit Admin</title>
@@ -78,12 +82,13 @@ if(isset($_GET['id'])){
                                     <input type="hidden"name="admin_id" value="<?php echo $edit_id; ?>">
                                     <input type="text" class="form-control" placeholder="First name" name="admin_name" size="30" value="<?php echo $edit_admin_name; ?>">
                                     <span class="input-group-btn"></span>
+                                    <input type="text" class="form-control" placeholder="midddle name" name="admin_midddle" size="30" value="<?php echo $edit_admin_midddle; ?>">
                                     <input type="text" class="form-control" placeholder="Last name" name="admin_last" size="30" value="<?php echo $edit_admin_last; ?>">         
                                 </div>
                                 <input type="text" class="form-control mt-2" placeholder="Username" name="admin_user" size="30" value="<?php echo $edit_admin_user; ?>">  
                                 <input type="text" class="form-control mt-2" placeholder="Password" name="admin_pass" size="50" value="<?php echo $edit_admin_pass; ?>">
                              
-                                <input type="submit" name="submit" value="Save" class="btn-red mt-2">
+                                <input type="submit" name="submit" value="Update" class="btn-red mt-2">
                                
                                 
                             </form> 

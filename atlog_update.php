@@ -1,7 +1,8 @@
 <?php
 include 'db_conn.php';
+
 if(isset($_POST['submit'])){
-    $emp_id = $_POST['emp_id'];
+    $atlog_id = $_POST['atlog_id'];
     $first_name = $_POST['first_name'];
     $middle_name = $_POST['middle_name'];
     $last_name = $_POST['last_name'];
@@ -12,62 +13,68 @@ if(isset($_POST['submit'])){
     $PM_in = $_POST['PM_in'];
     $PM_out = $_POST['PM_out'];
 
-    // Update employee table
-    $employee_sql = "UPDATE employee SET 
-                    first_name = '$first_name',
-                    middle_name = '$middle_name',
-                    last_name = '$last_name',
-                    com_id = '$com_id'
-                    WHERE emp_id = '$emp_id'";
+    $sql_atlog = "SELECT * FROM `atlog` WHERE atlog_id = '$atlog_id'";
+    $result_atlog = mysqli_query($conn, $sql_atlog);
 
-    // Update atlog table
-    $atlog_sql = "UPDATE atlog SET 
-                    atlog_date = '$atlog_date',
-                    am_in = '$AM_in',
-                    am_out = '$AM_out',
-                    pm_in = '$PM_in',
-                    pm_out = '$PM_out'
-                    WHERE emp_id = '$emp_id'";
+    if ($result_atlog) {
+        $row_atlog = mysqli_fetch_assoc($result_atlog);
+        $emp_id = $row_atlog['emp_id'];
 
-    if(mysqli_query($conn, $employee_sql) && mysqli_query($conn, $atlog_sql)){
-        header('location:index.php');
-        exit();
+        $employee_sql = "UPDATE employee SET 
+            first_name = '$first_name',
+            middle_name = '$middle_name',
+            last_name = '$last_name',
+            com_id = '$com_id'
+            WHERE emp_id = '$emp_id'";
+
+        $atlog_sql = "UPDATE atlog SET 
+            atlog_date = '$atlog_date',
+            am_in = '$AM_in',
+            am_out = '$AM_out',
+            pm_in = '$PM_in',
+            pm_out = '$PM_out'
+            WHERE atlog_id = '$atlog_id'";
+
+        if(mysqli_query($conn, $employee_sql) && mysqli_query($conn, $atlog_sql)){
+            header('location:index.php');
+            exit();
+        } else {
+            echo "Could not update record: ". mysqli_error($conn);
+        }
     } else {
-        echo "Could not update record: ". mysqli_error($conn);
+        echo "Atlog query error: " . mysqli_error($conn);
     }
 }
 
 // Fetch the existing data to pre-fill the form for editing
 if(isset($_GET['id'])){
     $edit_id = $_GET['id'];
-    $sql_employee = "SELECT * FROM `employee` WHERE emp_id = $edit_id";
+    $sql_employee = "SELECT * FROM `employee` WHERE emp_id = '$edit_id'";
     $result_employee = mysqli_query($conn, $sql_employee);
 
     if ($result_employee) {
-    while ($row_employee = mysqli_fetch_assoc($result_employee)) {
-        $emp_id = $row_employee['emp_id'];
-        $sql_atlog = "SELECT * FROM atlog WHERE emp_id = '$emp_id'";
-        $result_atlog = mysqli_query($conn, $sql_atlog);
-        $edit_id_loop = 0;
-        $edit_emp_first = $row_employee['first_name'];
-        $edit_emp_mid = $row_employee['middle_name'];
-        $edit_emp_last = $row_employee['last_name'];
-        $edit_com_id = $row_employee['com_id'];
-    
-                if ($result_atlog) {
-
-                    while ($row_atlog = mysqli_fetch_assoc($result_atlog)) {
-                        $edit_atlog_id = $row_atlog['atlog_id'];
-                        $edit_atlog_date = $row_atlog['atlog_date'];
-                        $edit_am_in = $row_atlog['am_in'];
-                        $edit_am_out = $row_atlog['am_out'];
-                        $edit_pm_in = $row_atlog['pm_in'];
-                        $edit_pm_out = $row_atlog['pm_out'];
-                    }
+        while ($row_employee = mysqli_fetch_assoc($result_employee)) {
+            $emp_id = $row_employee['emp_id'];
+            $sql_atlog = "SELECT * FROM atlog WHERE emp_id = '$emp_id'";
+            $result_atlog = mysqli_query($conn, $sql_atlog);
+            $edit_id_loop = 0;
+            $edit_emp_first = $row_employee['first_name'];
+            $edit_emp_mid = $row_employee['middle_name'];
+            $edit_emp_last = $row_employee['last_name'];
+            $edit_com_id = $row_employee['com_id'];
+        
+            if ($result_atlog) {
+                while ($row_atlog = mysqli_fetch_assoc($result_atlog)) {
+                    $edit_atlog_id = $row_atlog['atlog_id'];
+                    $edit_atlog_date = $row_atlog['atlog_date'];
+                    $edit_am_in = $row_atlog['am_in'];
+                    $edit_am_out = $row_atlog['am_out'];
+                    $edit_pm_in = $row_atlog['pm_in'];
+                    $edit_pm_out = $row_atlog['pm_out'];
                 }
             }
         }
-                                
+    }
 }
 ?>
 
@@ -77,6 +84,7 @@ if(isset($_GET['id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="./css/admin_update.css"> -->
    <link rel="stylesheet" href="./css/admin_update.css">
     
     <title>Edit Admin</title>
@@ -110,14 +118,14 @@ if(isset($_GET['id'])){
                             <div class="col-9">    
                             <form method="POST">
                                 <div class="input-group">
-                                    <input type="hidden"name="emp_id" value="<?php echo $edit_atlog_id; ?>">
-                                    <input type="text" class="form-control" placeholder="First name" name="first_name" size="30" value="<?php echo $edit_emp_first; ?>">
-                                    <input type="text" class="form-control" placeholder="Middle name" name="middle_name" size="30" value="<?php echo $edit_emp_mid; ?>">
+                                    <input type="hidden"name="atlog_id" value="<?php echo $edit_atlog_id; ?>">
+                                    <input type="text" class="form-control" placeholder="First name" name="first_name" size="30" value="<?php echo $edit_emp_first; ?>" >
+                                    <input type="text" class="form-control" placeholder="Middle name" name="middle_name" size="30" value="<?php echo $edit_emp_mid; ?>" >
 
                                     <span class="input-group-btn"></span>
-                                    <input type="text" class="form-control" placeholder="Last name" name="last_name" size="30" value="<?php echo $edit_emp_last; ?>">         
+                                    <input type="text" class="form-control" placeholder="Last name" name="last_name" size="30" value="<?php echo $edit_emp_last; ?>" >         
                                 </div>
-                                <input type="text" class="form-control mt-2" placeholder="Company ID" name="com_id" size="30" value="<?php echo $edit_com_id; ?>">
+                                <input type="text" class="form-control mt-2" placeholder="Company ID" name="com_id" size="30" value="<?php echo $edit_com_id; ?>" >
                                 <input type="text" class="form-control mt-2" placeholder="Date" name="atlog_date" size="30" value="<?php echo $edit_atlog_date; ?>"> 
                                 <input type="time" class="form-control mt-2" placeholder="AM in" name="AM_in" size="30" value="<?php echo $edit_am_in; ?>"> 
                                 <input type="time" class="form-control mt-2" placeholder="AM out" name="AM_out" size="30" value="<?php echo $edit_am_out; ?>"> 
