@@ -35,7 +35,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
     <body>
         <!-- </li>
         <p>Welcome, <?php $_SESSION['admin_name']; ?>!</p> -->
-        <!-- =============== Navigation ================ -->
+        <!-- =============== Navigation ===================== -->
+        <!-- =============== Navigation ===============Jolie= -->
         <div class="container-wrapper">
             <div class="navigation bg-yellow">
                 <ul>
@@ -325,16 +326,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-<!-- ======================= Login Reports Dashboard ================== -->
-                    <div class="card">Login Reports
-                    
-                    <div>
-                    <div class="table-responsive bg-yellow-container mt-2">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="search name..">
-                                <span class="input-group-btn"></span>
-                                <button class="btn-red" type="button">Search</button>
+
                             </div>
                             <table class="table table-hover table-responsive table-striped">
                                 <thead>
