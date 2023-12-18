@@ -89,9 +89,7 @@ if(isset($_GET['id'])){
                             </form> 
                             </div>
                         </div>
-                        <div class="updatelogo" >
-                            <img src="./assets/img/LogoCloseUp.png" alt="">
-                        </div>
+                        
                     </div>
                 </div>
         </div>

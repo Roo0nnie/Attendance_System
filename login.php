@@ -14,13 +14,16 @@ include 'db_conn.php';
         $admin_pass = validate($_POST['admin_pass']);
 
         if(empty($admin_user)) {
-            $_SESSION['error_message'] = "Username is required";
-            header("Location: loginForm.php?error=username is required");
-            exit();
+            $_SESSION['error_message'] = "Username is required.";
+            header("Location: loginForm.php");
+            mysqli_close($conn);
+            exit(); // Terminate script execution after displaying the alert
         }
         else if (empty($admin_pass)) {
-            header("Location: loginForm.php?error=admin_pass is required");
-            exit();
+            $_SESSION['error_message'] = "Admin password is required.";
+            header("Location: loginForm.php");
+            mysqli_close($conn);
+            exit(); // Terminate script execution after displaying the alert
         } else {
 
             $sql = "SELECT * FROM admin_account WHERE admin_user = '$admin_user' AND admin_pass = '$admin_pass'";
@@ -36,17 +39,23 @@ include 'db_conn.php';
                     exit();
 
                 } else {
-                    header("Location: loginForm.php?error=Incorrect username or admin_pass");
-                    exit();
+                    $_SESSION['error_message'] = "Incorrect username or password.";
+                    header("Location: loginForm.php");
+                    mysqli_close($conn);
+                    exit(); // Terminate script execution after displaying the alert
                 }
             } else {
+                $_SESSION['error_message'] = "Incorrect username or password.";
                 header("Location: loginForm.php");
-                exit();
+                mysqli_close($conn);
+                exit(); // Terminate script execution after displaying the alert
             }
         }
     } else {
+        $_SESSION['error_message'] = "Incorrect username or password.";
         header("Location: loginForm.php");
-        exit();
+        mysqli_close($conn);
+        exit(); // Terminate script execution after displaying the alert
     }
 
 ?>

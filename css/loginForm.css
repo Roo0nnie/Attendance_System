@@ -22,9 +22,9 @@ body::-webkit-scrollbar {
   margin-top: 10%;
   padding: 20px;
 	border: 1px solid black;
-	background-image: url(../assets/img/LogoCloseUp.png);
 	border: none;
 	border-radius: 10px;
+	width: 800px;
 }
 .content {
 	display: flex;
@@ -40,21 +40,15 @@ body::-webkit-scrollbar {
 	color: #1337C3;
   font-weight: 700;
 }
+.admin-key {
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
+}
 form {
 	padding: 20px;
 }
-input {
-	border-radius: 5px;
-	width: 350px;
-	border: none;
-	padding: 10px;
-}
-#login {
-	color: white;
-	background: linear-gradient(to right, #ffffff, #000000);
-	cursor: pointer;
-	margin: 2px;
-}
+
 span a {
 	color: #1337C3;
 	margin: 5px;
@@ -63,3 +57,164 @@ span a {
 label {
 	font-size: 13px;
 }
+
+
+.btn-yellow {
+	background-color: #f8f9fa;
+	color: var(--main-color-black);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.23);
+	transition: .5s ease-in-out;
+	padding: 0.75em 1.5em;
+	border-radius: 10px;
+	border-color:  #ffdd47;
+	cursor: pointer;
+  }
+  .btn-yellow:hover {
+	background: var(--main-color-white);
+	color: var(--main-color-black);
+	border-color: var(--main-color-white);
+  }
+  .input-field {
+	background-color: #f8f9fa;
+	color: var(--main-color-black);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.23);
+	transition: .5s ease-in-out;
+	padding: 0.75em 1.5em;
+	border-radius: 10px;
+	cursor: pointer;
+  }
+  
+.btn-red {
+	background: rgb(211, 198, 198);
+	color: var(--main-color-black);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.23);
+	transition: .5s ease-in-out;
+	padding: 0.75em 1.5em;
+	border-radius: 10px;
+	border-color:  rgb(7, 7, 7);
+	cursor: pointer;
+  }
+  
+  .btn-red:hover {
+	background: var(--main-color-white);
+	color: var(--main-color-black);
+	border-color: var(--main-color-white);
+  }
+  
+  /* Last Part  */
+  .bg-yellow-container {
+	background-color: #f8f9fa;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+	border-radius: 10px;
+	padding: 10px;
+  }
+  .bg-yellow {
+	background-color: #f8f9fa;
+	width: 100%;
+	min-height: 100vh;
+	/* border-radius: 10px; */
+  }
+
+  .text-color-yellow {
+	color: var(--text-color-yellow);
+  }
+  .text-color-red {
+	color: var(--main-color-red);
+  }
+  
+  /* Delivery Time Display */
+  .deliveryTimeDisplay {
+	display: none;
+  } 
+  .cursorpointer {
+	cursor: pointer;
+  }
+  .sidebar_product {
+	font-weight: 700;
+	font-size: 13px;
+  }
+  .sidebar_price {
+  color: var(--main-color-red);
+  font-weight: 900;
+  }
+  .sidebar_detail {
+	color: #000000;
+	font-size: 12px !important;
+  }
+  .black {
+	color: var(--main-color-black);
+  }
+  a.nav-link {
+	color: #706666;
+	background: none;
+	font-weight: 600; 
+  }
+  a.nav-link.active {
+	border-bottom: 2px solid;
+	color: #fff;
+	background: none;
+	font-weight: 600;
+  }
+  .checkout_price {
+	color: var(--text-color-yellow);
+	font-weight: 900;
+	font-size: 25px;
+  }
+  .checkoutBox {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  .cursorpointer {
+	cursor: pointer;
+  }
+  .check {
+	  font-size: 3rem;
+	  color: rgb(79, 128, 0);
+	  font-weight: 900;
+  }
+  .check-red {
+	font-size: 3rem;
+	color: var(--main-color-red);
+	font-weight: 900;
+  }
+  
+  .profile {
+	position: absolute;
+	bottom: -1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	/* Additional styling for the container */
+	width: 100px; /* Set width as needed */
+	height: 100px; /* Set height as needed */
+	background-color: #f0f0f0;
+	border-radius: 50%; 
+	z-index: 100;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+  
+  }
+  .delete_admin a {
+	  text-decoration: none;
+	  color: var(--main-color-white);
+  }
+  .delete_admin a:hover {
+	  color: var(--main-color-black);
+  }
+  
+  .updatelogo{
+	border: 1px solid black;
+	overflow: hidden;
+	margin-top: 5rem;
+	/* margin-left: 25rem; */
+	position: relative;
+	height: 400px;
+	width: 100%;
+  }
+  
+  .updatelogo img{
+	position: absolute;
+	height: 400px;
+	width: 100%;
+  }
+  
+
