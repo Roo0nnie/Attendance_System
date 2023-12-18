@@ -737,3 +737,8 @@ a:hover {
   top: 1.5rem;
   left: 1rem;
 }
+.logout-btn {
+  position: absolute;
+  left: -14rem;
+  bottom: 2rem;
+}

@@ -49,22 +49,23 @@ body {
   background: var(--main-color-white);
   color: var(--main-color-black);
   border-color: var(--main-color-white);
-}.btn-red {
-  background-image: linear-gradient(45deg,rgb(151, 18, 18) 0%, #d32222  51%, rgb(151, 18, 18)  100%);
-  color: var(--main-color-white);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.23);
-  transition: .5s ease-in-out;
-  padding: 0.75em 1.5em;
-  border-radius: 10px;
-  border-color:  rgb(151, 18, 18);
-  cursor: pointer;
 }
+.btn-red {
+	background: rgb(211, 198, 198);
+	color: var(--main-color-black);
+	box-shadow: 0 5px 10px rgba(0,0,0,0.23);
+	transition: .5s ease-in-out;
+	padding: 0.75em 1.5em;
+	border-radius: 10px;
+	border-color:  rgb(7, 7, 7);
+	cursor: pointer;
+  }
   
-.btn-red:hover {
-  background: var(--main-color-white);
-  color: var(--main-color-black);
-  border-color: var(--main-color-white);
-}
+  .btn-red:hover {
+	background: var(--main-color-white);
+	color: var(--main-color-black);
+	border-color: var(--main-color-white);
+  }
 
 /* Last Part  */
 .bg-yellow-container {

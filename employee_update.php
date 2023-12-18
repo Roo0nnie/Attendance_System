@@ -9,7 +9,6 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-
     // Assuming you have an admin_id ID to identify the record to update
     $emp_id = $_POST['emp_id'];
     $sql = "UPDATE employee SET 
@@ -104,9 +103,6 @@ if(isset($_GET['id'])){
                                
                             </form> 
                             </div>
-                        </div>
-                        <div class="updatelogo" >
-                            <img src="./assets/img/LogoCloseUp.png" alt="">
                         </div>
                     </div>
                 </div>

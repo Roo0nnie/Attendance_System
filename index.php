@@ -33,8 +33,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
     </head>
 
     <body>
-        <!-- </li>
-        <p>Welcome, <?php $_SESSION['admin_name']; ?>!</p> -->
+    
         <!-- =============== Navigation ================ -->
         <div class="container-wrapper">
             <div class="navigation bg-yellow">
@@ -53,7 +52,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                     <li>
                         <a href="#">
                             <span class="icon">
-                                <ion-icon name="home-outline"></ion-icon>
+                            <ion-icon name="settings-outline"></ion-icon>
                             </span>
                             <span class="title">Employee Maintenance</span>
                         </a>
@@ -61,7 +60,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                     <li>
                         <a href="#admin">
                             <span class="icon">
-                                <ion-icon name="people-outline"></ion-icon>
+                            <ion-icon name="person-add-outline"></ion-icon>
                             </span>
                             <span class="title">Login Reports</span>
                         </a>
@@ -70,7 +69,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                     <li>
                         <a href="#">
                             <span class="icon">
-                                <ion-icon name="archive-outline"></ion-icon>
+                            <ion-icon name="reader-outline"></ion-icon>
                             </span>
                             <span class="title">Daily Reports</span>
                         </a>
@@ -79,7 +78,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                     <li>
                         <a href="#">
                             <span class="icon">
-                                <ion-icon name="storefront-outline"></ion-icon>
+                            <ion-icon name="receipt-outline"></ion-icon>
                             </span>
                             <span class="title">Monthly Reports</span>
                         </a>
@@ -88,23 +87,31 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                 </ul>
                 
             </div>
+            
             <div>
                 </div>
             
            
 
             <!-- ========================= Main ==================== -->
-            <div class="main ">
+            <div class="main position-relative">
+            <div class="logout-btn">
+                <button class="btn-red mt-3 px-5"><a href="logout.php">Log out</a></button>
+            </div>
                 <div class="topbar">
                     <div class="toggle">
                         <ion-icon name="menu-outline" class="text-black"></ion-icon>
                     </div>
-                    <div class="employee">
-                        <button class="btn-red mt-3"><a href="employee_loginForm.php"><ion-icon name="ellipsis-vertical-outline"></ion-icon</a></button>
-                        <button class="btn-red mt-3"><a href="logout.php"><ion-icon name="power-outline"></ion-icon></a></button>
-
+                    <div class="mt-5">
+                    <p>Hello admin <button class="btn-red"><?php print $_SESSION['admin_name']; ?></button>.</p>
                     </div>
-                </div>
+                    <div class="employee">
+                        <button class="btn-red mt-3"><ion-icon name="settings-outline" data-bs-target="#exampleModalAdmin<?php echo $_SESSION['admin_id']; ?>" data-bs-toggle="modal"></ion-icon></button>                    </div>
+                    </div>
+                    
+                    
+                    
+                    
                 <!-- ======================= Employee Dashboard ================== -->
                 <div class="cardBox">
                     <div class="card active">
@@ -124,13 +131,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                             ?>
                             <div class="row">
                                 <div class="col d-flex justify-content-between">
-                                    <div class="cardName">
-                                        <h2>Employee<span class="badge btn-red">
-                                                <?php echo $id_loop; ?></span></h2>
-                                    </div>
+                                   <div>
+                                   Employee<span class="mx-2 badge bg-primary"><?php echo $id_loop; ?></span>
+                                   </div>
+                                        
+                                   
                                     <button class="btn-red" data-bs-toggle="modal" data-bs-target="#addemployee">Add employee</button>
 
-                                    <div class="modal fade" id="addemployee" tabindex="-1" aria-labelledby="exampleModalAddAdmin" aria-hidden="true">
+                                    <div class="modal fade" id="addemployee" tabindex="-1" aria-labelledby="exampleModalAdmin" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                             <div class="modal-content bg-yellow">
                                                 <div class="modal-header">
@@ -210,15 +218,36 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                     <div class="productBox">
                                         <div>
 
-                                            <div class="sidebar_product">TOTAL employeeS</div>
+                                            <div class="sidebar_product">TOTAL employee</div>
                                             <div>
-                                                <div><span class="fs-5 px-2"> <?php echo $id_loop; ?></span><span></span></div>
+                                                <div><span class="fs-5 px-2"><?php echo $id_loop; ?></span><span></span></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="productBox">
                                         <div>
-                                            <div class="sidebar_product">ACTIVE MEMBERS</div>
+                                        <?php
+                                            $sql = "Select * from `atlog`";
+                
+                                            $result = mysqli_query($conn, $sql);
+                                            $atlog_loop = 0;
+                                            if ($result) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    $atlog_loop += 1;
+                                            ?>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                            <div class="sidebar_product">TOTAL logged in</div>
+                                            <div>
+                                                <div><span class="fs-5 px-2"><?php echo $atlog_loop; ?></span><span></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="productBox">
+                                        <div>
+                                            <div class="sidebar_product">NEW employee</div>
                                             <div>
                                                 <div><span class="fs-5 px-2">0</span><span></span></div>
                                             </div>
@@ -226,17 +255,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                     </div>
                                     <div class="productBox">
                                         <div>
-                                            <div class="sidebar_product">NEW RETURNING</div>
+                                            <div class="sidebar_product">ACTIVE employee</div>
                                             <div>
-                                                <div><span class="fs-5 px-2">0%</span><span></span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="productBox">
-                                        <div>
-                                            <div class="sidebar_product">ACTIVE MEMBERS</div>
-                                            <div>
-                                                <div><span class="fs-5 px-2">0</span><span></span></div>
+                                                <div><span class="fs-5 px-2"><?php echo $atlog_loop; ?></span><span></span></div>
                                             </div>
                                         </div>
                                     </div>
@@ -248,9 +269,9 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                             <div>
                                 <nav class="nav"><!--nav start-->
                                     <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#Allorders">All</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#openOrders">Sales</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#">Accounts</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#">Reviews</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#openOrders">Employee</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#">Active</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#">Log in</a></li>
                                 </nav><!--nav end-->
                                 <div class="tab-content m-3"><!--tab content start-->
                                     <div id="Allorders" class="tab-pane active">
@@ -262,7 +283,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                 </div>
                                                 <div class="table-responsive bg-yellow-container mt-2">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="search name..">
+                                                        <input type="text" class="form-control" placeholder="search..">
                                                         <span class="input-group-btn"></span>
                                                         <button class="btn-red" type="button">Search</button>
                                                     </div>
@@ -327,12 +348,14 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                         </div>
                     </div>
 <!-- ======================= Login Reports Dashboard ================== -->
-                    <div class="card">Login Reports
-                    
+                    <div class="card">
+                    <div>
+                       Login Reports<span class="mx-2 badge bg-primary"><?php echo $atlog_loop; ?></span>
+                    </div>
                     <div>
                     <div class="table-responsive bg-yellow-container mt-2">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="search name..">
+                                <input type="text" class="form-control" placeholder="search..">
                                 <span class="input-group-btn"></span>
                                 <button class="btn-red" type="button">Search</button>
                             </div>
@@ -371,6 +394,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                 if ($result_atlog) {
                                     
                                     while ($row_atlog = mysqli_fetch_assoc($result_atlog)) {
+                                        $emp_id = $row_atlog['emp_id'];
                                         $atlog_id = $row_atlog['atlog_id'];
                                         $atlog_date = $row_atlog['atlog_date'];
                                         $am_in = $row_atlog['am_in'];
@@ -391,7 +415,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                             <td>
                                                 <button type="button" class="btn-yellow" data-bs-target="#exampleModalReports' . $row_atlog['emp_id'] . '" data-bs-toggle="modal">Update</button>
                                                 <button type="button" class="btn-red px-1 delete_admin">
-                                                    <a href="employee_delete.php?id=' . $atlog_id . '">Delete</a>
+                                                    <a href="atlog_delete.php?id=' . $emp_id . '">Delete</a>
                                                 </button>
                                             </td>
                                         </tr>';
@@ -415,7 +439,10 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                     
                     
 <!-- ======================= Daily Reports Dashboard ================== -->
-                    <div class="card">Daily Reports
+                    <div class="card">
+                    <div>
+                       Daily Reports<span class="mx-2 badge bg-primary"><?php echo $atlog_loop; ?></span>
+                    </div>
                     <div>
                     <?php
                         $sql_employee = "SELECT * FROM `employee`";
@@ -503,7 +530,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                         <div class="modal-content bg-yellow">
                                 <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Employee Details</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">'.$row["first_name"].' Details</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -533,15 +560,15 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                         <form method="GET">
                                                             <div class="input-group">
                                                                 <input type="hidden" name="emp_id" value="' . $row["emp_id"] . '">
-                                                                <input type="text" class="form-control" placeholder="First name" name="first_name" value="' . $row["first_name"] . '">
+                                                                <input type="text" class="form-control" placeholder="First name" name="first_name" value="' . $row["first_name"] . '" readonly>
                                                                 <span class="input-group-btn"></span>
-                                                                <input type="text" class="form-control" placeholder="Middle name" name="middle_name" value="' . $row["middle_name"] . '">
-                                                                <input type="text" class="form-control" placeholder="Last name" name="last_name" value="' . $row["last_name"] . '">         
+                                                                <input type="text" class="form-control" placeholder="Middle name" name="middle_name" value="' . $row["middle_name"] . '" readonly>
+                                                                <input type="text" class="form-control" placeholder="Last name" name="last_name" value="' . $row["last_name"] . '" readonly>         
                                                             </div>
-                                                            <input type="text" class="form-control mt-2" placeholder="ID" name="com_id" value="' . $row["com_id"] . '">
-                                                            <input type="text" class="form-control mt-2" placeholder="Address" name="address" value="' . $row["address"] . '">
-                                                            <input type="text" class="form-control mt-2" placeholder="Email" name="email" value="' . $row["email"] . '">  
-                                                            <input type="text" class="form-control mt-2" placeholder="Phone" name="phone" value="' . $row["phone"] . '">
+                                                            <input type="text" class="form-control mt-2" placeholder="ID" name="com_id" value="' . $row["com_id"] . '" readonly>
+                                                            <input type="text" class="form-control mt-2" placeholder="Address" name="address" value="' . $row["address"] . '" readonly>
+                                                            <input type="text" class="form-control mt-2" placeholder="Email" name="email" value="' . $row["email"] . '" readonly>  
+                                                            <input type="text" class="form-control mt-2" placeholder="Phone" name="phone" value="' . $row["phone"] . '" readonly>
                                                             
                                                         </form>       
                                                         </div>
@@ -565,6 +592,86 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
             echo "0 results";
         }
         ?>
+        
+        
+               <!-- update admin account -->
+               <?php
+
+$sql = "Select * from `admin_account`";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // Output data of each row
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '
+        <div class="modal fade" id="exampleModalAdmin' . $row["admin_id"] . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                <div class="modal-content bg-yellow">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">'. $row["admin_name"] .' Details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                <nav class="nav"><!--nav start-->
+                                    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#profile">Profile</a></li>
+                                </nav><!--nav end-->
+                                <div class="tab-content m-3"><!--tab content start-->
+                                    <div id="profile" class="tab-pane active">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="bg-yellow-container position-relative" style="min-height:150px; ">
+                                                <div class="profile position-absolute">
+                                                    <img src="" alt="">
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-5">
+                                                <div class="col-3">
+                                                <div class="row"><div><label for="" class="form-label mt-2">Full name</label></div></div>
+                                                <div class="row"><div><label for="" class="form-label mt-3">Username</label></div></div>
+                                                <div class="row"><div><label for="" class="form-label mt-3">Password</label></div></div>
+
+                                                </div>
+                                                <div class="col-9">  
+                                                <form method="GET">
+                                                    <div class="input-group">
+                                                        <input type="hidden" name="admin_id" value="' . $row["emp_id"] . '">
+                                                        <input type="text" class="form-control" placeholder="First name" name="admin_name" value="' . $row["admin_name"] . '" readonly>
+                                                        <span class="input-group-btn"></span>
+                                                        <input type="text" class="form-control" placeholder="Middle name" name="admin_middle" value="' . $row["admin_midddle"] . '" readonly>
+                                                        <input type="text" class="form-control" placeholder="Last name" name="admin_last" value="' . $row["admin_last"] . '" readonly>         
+                                                    </div>
+                                                    <input type="text" class="form-control mt-2" placeholder="ID" name="admin_user" value="' . $row["admin_user"] . '" readonly>
+                                                    <input type="text" class="form-control mt-2" placeholder="Address" name="admin_pass" value="' . $row["admin_pass"] . '" readonly>
+                                                  
+                                                    
+                                                </form>       
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-yellow" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn-red" data-bs-dismiss="modal" name="submit" ><a href="admin_update.php?id=' . $row["admin_id"] . '">Edit</a></button>
+                </div>
+                </div>
+            </div>
+        </div>'
+?>
+
+<?php  }
+} else {
+    echo "0 results";
+}
+?>
+
+        
+        
+        
 
         <!-- =============== Modal Popup ================ -->
         <!-- update Record account -->
@@ -575,8 +682,8 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                         if ($result_employee) {
                             while ($row_employee = mysqli_fetch_assoc($result_employee)) {
                                 $emp_id = $row_employee['emp_id'];
-                                $sql_atlog = "SELECT * FROM atlog WHERE emp_id = '$emp_id'";
-                                $result_atlog = mysqli_query($conn, $sql_atlog);
+                                $emp_atlog = "SELECT * FROM atlog WHERE emp_id = '$emp_id'";
+                                $result_atlog = mysqli_query($conn, $emp_atlog);
                                 $id_loop = 0;
                                 $emp_first = $row_employee['first_name'];
                                 $emp_mid = $row_employee['middle_name'];
@@ -586,6 +693,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                 if ($result_atlog) {
                                     
                                     while ($row_atlog = mysqli_fetch_assoc($result_atlog)) {
+                                        
                                         $atlog_id = $row_atlog['atlog_id'];
                                         $atlog_date = $row_atlog['atlog_date'];
                                         $am_in = $row_atlog['am_in'];
@@ -598,7 +706,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
                                             <div class="modal-content bg-yellow">
                                                     <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Employee Details</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">'. $emp_first .' Details</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -629,18 +737,18 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                                                             <div class="col-9">  
                                                                             <form method="GET">
                                                                                 <div class="input-group">
-                                                                                    <input type="hidden" name="emp_id" value="' . $row_atlog['emp_id'] . '">
-                                                                                    <input type="text" class="form-control" placeholder="First name" name="first_name" value="' . $emp_first. '">
+                                                                                    <input type="hidden" name="atlog_id" value="' . $atlog_id . '" readonly>
+                                                                                    <input type="text" class="form-control" placeholder="First name" name="first_name" value="' . $emp_first. '" readonly>
                                                                                     <span class="input-group-btn"></span>
-                                                                                    <input type="text" class="form-control" placeholder="Middle name" name="middle_name" value="' . $emp_mid . '">
-                                                                                    <input type="text" class="form-control" placeholder="Last name" name="last_name" value="'.$emp_last.'">         
+                                                                                    <input type="text" class="form-control" placeholder="Middle name" name="middle_name" value="' . $emp_mid . '" readonly>
+                                                                                    <input type="text" class="form-control" placeholder="Last name" name="last_name" value="'.$emp_last.'" readonly>         
                                                                                 </div>
-                                                                                <input type="text" class="form-control mt-2" placeholder="Company ID" name="com_id" value="'.$com_id.'">
-                                                                                <input type="date" class="form-control mt-2" placeholder="Date" name="atlog_date" value="' . $row_atlog['atlog_date'] . '">
-                                                                                <input type="text" class="form-control mt-2" placeholder="AM in" name="AM_in" value="' . $row_atlog['am_in'] . '">
-                                                                                <input type="text" class="form-control mt-2" placeholder="AM out" name="AM_out" value="' . $row_atlog['am_out'] . '">
-                                                                                <input type="text" class="form-control mt-2" placeholder="PM in" name="PM_in" value="' . $row_atlog['pm_in'] . '">  
-                                                                                <input type="text" class="form-control mt-2" placeholder="PM out" name="PM_out" value="' . $row_atlog['pm_out'] . '">
+                                                                                <input type="text" class="form-control mt-2" placeholder="Company ID" name="com_id" value="'.$com_id.'" readonly>
+                                                                                <input type="date" class="form-control mt-2" placeholder="Date" name="atlog_date" value="' . $row_atlog['atlog_date'] . '" readonly>
+                                                                                <input type="text" class="form-control mt-2" placeholder="AM in" name="AM_in" value="' . $row_atlog['am_in'] . '" readonly>
+                                                                                <input type="text" class="form-control mt-2" placeholder="AM out" name="AM_out" value="' . $row_atlog['am_out'] . '"readonly>
+                                                                                <input type="text" class="form-control mt-2" placeholder="PM in" name="PM_in" value="' . $row_atlog['pm_in'] . '" readonly>  
+                                                                                <input type="text" class="form-control mt-2" placeholder="PM out" name="PM_out" value="' . $row_atlog['pm_out'] . '" readonly>
                                                                                 
                                                                             </form>       
                                                                             </div>
