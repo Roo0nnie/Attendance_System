@@ -1,0 +1,252 @@
+//log for number 3
+
+				$emp_id = $row['emp_id'];
+                                $pm_in_date = date('Y-m-d'); 
+                                $pm_in = date('H:i:s');  
+                             
+                                
+                                $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id' AND pm_in IS NOT NULL";
+
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    $_SESSION['error_message'] = "You already login this afternoon.";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); 
+                                } else {
+
+                                    $emp_id = $row['emp_id'];
+                                   
+                                    // Query to check if the specific value exists in any row of the 'column_name'
+                                    $check_query = "SELECT COUNT(*) AS count FROM atlog WHERE emp_id = '$emp_id'";
+                                    $result_check = mysqli_query($conn, $check_query);
+                                    
+                                    if ($result_check) {
+                                        $row = mysqli_fetch_assoc($result_check);
+                                        $count = $row['count'];
+                                        if ($count > 0) {
+                                             $sql = "UPDATE atlog SET 
+                                            pm_in = '$pm_in'
+                                            WHERE emp_id = '$emp_id'";
+                                
+                                        if (mysqli_query($conn, $sql)) {
+                                            $_SESSION['error_message'] = "Time in this afternoon: $pm_in";
+                                            header("Location: employee_loginForm.php");
+                                            mysqli_close($conn);
+                                            exit(); // Terminate script execution after displaying the alert
+                                        } else {
+                                            $_SESSION['error_message'] = "Cannot logout this afternoon";
+                                            mysqli_close($conn);
+                                            header("Location: employee_loginForm.php");
+                                            exit();
+                                        } 
+                                
+                                }
+                                $sql = "INSERT INTO atlog(emp_id, atlog_date, pm_in) VALUES ('$emp_id', '$pm_in_date', '$pm_in')";
+            
+                                if (mysqli_query($conn, $sql)) {
+                                    $_SESSION['error_message'] = "Time in this afternoon: $pm_in";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); // Terminate script execution after displaying the alert
+                                } else {
+                                    $_SESSION['error_message'] = "Cannot login this morning";
+                                    mysqli_close($conn);
+                                    header("Location: employee_loginForm.php");
+                                    exit();
+                                } 
+                                        } else {
+                                             
+                                        }
+                                    }
+
+
+
+
+// for number 4 add pm out
+
+				$emp_id = $row['emp_id'];
+                                $pm_out_date = date('Y-m-d'); 
+                                $pm_out = date('H:i:s'); 
+                            
+                                $check_emp_sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id' AND pm_in IS NOT  NULL";
+                                $check_emp_result = mysqli_query($conn, $check_emp_sql);
+
+                                if (mysqli_num_rows($check_emp_result) === 0) {
+            
+                                    $_SESSION['error_message'] = "You have not logged in yet this afternoon.";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); 
+                                }
+  
+                                
+                                $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id' AND pm_out IS NOT NULL";
+
+                                $result = mysqli_query($conn, $sql);
+
+                                if (mysqli_num_rows($result) > 0) {
+
+                                    $_SESSION['error_message'] = "You already logout this afternoon.";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); 
+                                } else {
+                                        $sql = "UPDATE atlog SET 
+                                        pm_out = '$pm_out'
+                        
+                                        WHERE emp_id = '$emp_id'";
+                                    
+                                    if (mysqli_query($conn, $sql)) {
+                                        $_SESSION['error_message'] = "Time out this afternoon: $pm_out";
+                                        header("Location: employee_loginForm.php");
+                                        mysqli_close($conn);
+                                        exit(); // Terminate script execution after displaying the alert
+                                    } else {
+                                        $_SESSION['error_message'] = "Cannot logout this morning";
+                                        mysqli_close($conn);
+                                        header("Location: employee_loginForm.php");
+                                        exit();
+                                    }
+                                }
+
+
+
+
+
+// for number 2 add am_in log	
+
+			$emp_id = $row['emp_id'];
+                                $am_in_date = date('Y-m-d'); // Corrected date format
+                                $am_in = date('H:i:s'); 
+
+                                $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id' AND am_in IS NOT NULL";
+
+                                $result = mysqli_query($conn, $sql);
+                         
+                                // Check if there are any rows returned
+                                if (mysqli_num_rows($result) > 0) {
+                                    $_SESSION['error_message'] = "You already login this morning.";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); 
+                                } else {
+
+                                    $sql = "INSERT INTO atlog(emp_id, atlog_date, am_in) VALUES ('$emp_id', '$am_in_date', '$am_in')";
+                                if (mysqli_query($conn, $sql)) {
+                                    $_SESSION['error_message'] = "Time in this morning:";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); // Terminate script execution after displaying the alert
+                                } else {
+                                    $_SESSION['error_message'] = "Cannot login this morning";
+                                    mysqli_close($conn);
+                                    header("Location: employee_loginForm.php");
+                                    exit();
+                                } 
+                                }    
+
+
+
+//number 1 log in am
+
+$emp_id = $row['emp_id'];
+                                $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id'";
+                                $result = mysqli_query($conn, $sql);
+                                
+                                if (mysqli_num_rows($result) > 0) {
+                                    $row = mysqli_fetch_assoc($result);
+                                    $today = date('Y-m-d');
+                                    $yesterday = $row['atlog_date'];
+                                    
+                                    if ($yesterday == $today) {
+                                        $_SESSION['error_message'] = "You already logged in this morning.";
+                                        header("Location: employee_loginForm.php");
+                                        mysqli_close($conn);
+                                    }
+                                    $emp_id = $row['emp_id'];
+                                    $am_in_date = date('Y-m-d'); // Corrected date format
+                                    $am_in = date('H:i:s'); 
+    
+                                    $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id' AND am_in IS NOT NULL";
+    
+                                    $result = mysqli_query($conn, $sql);
+                             
+                                    // Check if there are any rows returned
+                                    if (mysqli_num_rows($result) > 0) {
+                                        $_SESSION['error_message'] = "You already login this morning.";
+                                        header("Location: employee_loginForm.php");
+                                        mysqli_close($conn);
+                                        exit(); 
+                                    } else {
+    
+                                        $sql = "INSERT INTO atlog(emp_id, atlog_date, am_in) VALUES ('$emp_id', '$am_in_date', '$am_in')";
+                                    if (mysqli_query($conn, $sql)) {
+                                        $_SESSION['error_message'] = "Time in this morning: $am_in";
+                                        header("Location: employee_loginForm.php");
+                                        mysqli_close($conn);
+                                        exit(); // Terminate script execution after displaying the alert
+                                    } else {
+                                        $_SESSION['error_message'] = "Cannot login this morning";
+                                        mysqli_close($conn);
+                                        header("Location: employee_loginForm.php");
+                                        exit();
+                                    } 
+                                    }  
+                                }
+                                $emp_id = $row['emp_id'];
+                                $am_in_date = date('Y-m-d'); // Corrected date format
+                                $am_in = date('H:i:s'); 
+
+                                $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id' AND am_in IS NOT NULL";
+                                $result = mysqli_query($conn, $sql);
+                         
+                                // Check if there are any rows returned
+                                if (mysqli_num_rows($result) > 0) {
+                                    $_SESSION['error_message'] = "You already login this morning.";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); 
+                                } else {
+
+                                    $sql = "INSERT INTO atlog(emp_id, atlog_date, am_in) VALUES ('$emp_id', '$am_in_date', '$am_in')";
+                                if (mysqli_query($conn, $sql)) {
+                                    $_SESSION['error_message'] = "Time in this morning: $am_in";
+                                    header("Location: employee_loginForm.php");
+                                    mysqli_close($conn);
+                                    exit(); // Terminate script execution after displaying the alert
+                                } else {
+                                    $_SESSION['error_message'] = "Cannot login this morning";
+                                    mysqli_close($conn);
+                                    header("Location: employee_loginForm.php");
+                                    exit();
+                                } 
+                                }  
+
+
+
+
+
+//same date condition 
+				$emp_id = $row['emp_id'];
+                                $sql = "SELECT * FROM atlog WHERE emp_id = '$emp_id'";
+                                $result = mysqli_query($conn, $sql);
+                                
+                                if (mysqli_num_rows($result) > 0) {
+                                    $row = mysqli_fetch_assoc($result);
+                                    $today = date('Y-m-d');
+                                    $yesterday = $row['atlog_date'];
+                                    
+                                    if ($yesterday === $today) {
+                                        $_SESSION['error_message'] = "Meron na";
+                                        header("Location: employee_loginForm.php");
+                                        exit;
+                                    }
+                                        $_SESSION['error_message'] = "Wala pa";
+                                        header("Location: employee_loginForm.php");
+                                        exit;
+                                }
+                                $_SESSION['error_message'] = "no record";
+                                header("Location: employee_loginForm.php");
+                                exit;
