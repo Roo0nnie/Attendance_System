@@ -219,11 +219,11 @@ if(isset($_POST['submit'])) {
                                     mysqli_close($conn);
                                     exit(); // Terminate script execution after displaying the alert
                                 } else {
+                                    $pm_out = date('H:i:s'); 
                                     // am_in is not empty for the given emp_id
                                     // $sql = "INSERT INTO atlog(emp_id, atlog_date, pm_out, type) VALUES ('$emp_id', '$pm_out_date', '$pm_out', '$type')";
                                     $sql = "UPDATE atlog SET 
                                         pm_out = '$pm_out'
-                                        -- type = '$type'
                                         WHERE emp_id = '$emp_id'";
                                     
                                     if (mysqli_query($conn, $sql)) {

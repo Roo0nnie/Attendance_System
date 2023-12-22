@@ -43,7 +43,7 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                             <span class="icon">
                             </span>
                             <div class="imglogo">
-                                <img src="./assets/img/LogoCloseUp.png" alt="">
+                                <img src="./assets/img/attendanceLogo.png" alt="">
                             </div>
                             <span class="title"></span>
                         </a>
@@ -135,7 +135,6 @@ if (isset($_SESSION['admin_id']) && isset($_SESSION['admin_name'])) {
                                    Employee<span class="mx-2 badge bg-primary"><?php echo $id_loop; ?></span>
                                    </div>
                                         
-                                   
                                     <button class="btn-red" data-bs-toggle="modal" data-bs-target="#addemployee">Add employee</button>
 
                                     <div class="modal fade" id="addemployee" tabindex="-1" aria-labelledby="exampleModalAdmin" aria-hidden="true">
